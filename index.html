@@ -10,59 +10,84 @@
     <!-- Navigation Bar -->
     <div class="animated-border p-[2px] rounded-lg w-4/5 mx-auto mt-4">
         <nav class="relative bg-black rounded-lg">
-            <div class="container mx-auto flex items-center p-4">
-                <!-- Brave Icon -->
-                <div class="flex-shrink-0">
-                    <img src="static/assets/icons/brave-icon.svg" alt="Brave" class="w-12 h-12">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Brave Icon -->
+                    <div class="flex-shrink-0">
+                        <img src="static/assets/icons/brave-icon.svg" alt="Brave" class="w-8 h-8 md:w-12 md:h-12">
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button type="button" onclick="toggleMobileMenu()" class="text-gray-400 hover:text-white">
+                            <svg class="h-6 w-6" id="menuIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex md:items-center md:space-x-6">
+                        <div class="dropdown relative">
+                            <button onclick="toggleDropdown('browser')" class="hover:text-gray-400 py-2">Browser</button>
+                            <div id="browser" class="dropdown-content hidden absolute mt-2 w-48 bg-black border border-gray-700 rounded-md shadow-lg">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">Downloads</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">Desktop</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">Android</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">iOS</a>
+                            </div>
+                        </div>
+                        <div class="dropdown relative">
+                            <button onclick="toggleDropdown('features')" class="hover:text-gray-400 py-2">Features</button>
+                            <div id="features" class="dropdown-content hidden absolute mt-2 w-48 bg-black border border-gray-700 rounded-md shadow-lg">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">Brave Shields</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">VPN</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">Leo AI</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">Wallet</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-800">Rewards</a>
+                            </div>
+                        </div>
+                        <a href="#" class="hover:text-gray-400 py-2">Playlists</a>
+                        <a href="#" class="hover:text-gray-400 py-2">News</a>
+                        <a href="#" class="hover:text-gray-400 py-2">Talk</a>
+                        <a href="#" class="hover:text-gray-400 py-2">Advanced Privacy</a>
+                        <a href="#" class="hover:text-gray-400 py-2">All Features</a>
+                    </div>
                 </div>
-                <!-- Navigation Links -->
-                <div class="flex space-x-6 ml-20 flex-grow justify-end">
-                    <div class="dropdown">
-                        <button onclick="toggleDropdown('browser')" class="hover:text-gray-400 py-2">Browser</button>
-                        <div id="browser" class="dropdown-content hidden absolute mt-2 w-48 bg-black border border-gray-700 rounded-md shadow-lg">
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Downloads</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Desktop</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Android</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">iOS</a>
-                        </div>
+
+                <!-- Mobile Navigation Menu -->
+                <div class="hidden md:hidden" id="mobileMenu">
+                    <div class="px-2 pt-2 pb-3 space-y-1">
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-800 rounded-md">Browser</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-800 rounded-md">Features</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-800 rounded-md">Playlists</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-800 rounded-md">News</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-800 rounded-md">Talk</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-800 rounded-md">Advanced Privacy</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-800 rounded-md">All Features</a>
                     </div>
-                    <div class="dropdown">
-                        <button onclick="toggleDropdown('features')" class="hover:text-gray-400 py-2">Features</button>
-                        <div id="features" class="dropdown-content hidden absolute mt-2 w-48 bg-black border border-gray-700 rounded-md shadow-lg">
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Brave Shields</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">VPN</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Leo AI</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Wallet</a>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Rewards</a>
-                        </div>
-                    </div>
-                    <a href="#" class="hover:text-gray-400 py-2">Playlists</a>
-                    <a href="#" class="hover:text-gray-400 py-2">News</a>
-                    <a href="#" class="hover:text-gray-400 py-2">Talk</a>
-                    <a href="#" class="hover:text-gray-400 py-2">Advanced Privacy</a>
-                    <a href="#" class="hover:text-gray-400 py-2">All Features</a>
                 </div>
             </div>
         </nav>
     </div>
 
     <!-- Card Section -->
-    <div class="flex justify-center items-center min-h-[calc(100vh-120px)] p-8">
-        <div class="popout-container">
+    <div class="flex justify-center items-center min-h-[calc(100vh-120px)] p-4 md:p-8">
+        <div class="popout-container w-full max-w-[95%] md:max-w-[500px]">
             <div class="card">
-                <h2 class="card-title">Brave Browser</h2>
-                <p class="card-text">
+                <h2 class="card-title text-xl md:text-2xl lg:text-3xl">Brave Browser</h2>
+                <p class="card-text text-sm md:text-base">
                     A secure, fast, and private web browser with built-in shields and rewards. 
                     Experience the web without trackers, malware, or ads while earning rewards for your attention.
                 </p>
                 <div class="image-wrapper">
                     <img src="static/assets/images/bg.png" alt="Brave Browser Preview" class="card-image">
                 </div>
-                <div class="card-footer">
-                    <a href="https://github.com/brave" class="card-link" target="_blank" rel="noopener noreferrer">
+                <div class="card-footer flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
+                    <a href="https://github.com/brave" class="card-link text-center md:text-left" target="_blank" rel="noopener noreferrer">
                         View Source Code
                     </a>
-                    <a href="https://laptop-updates.brave.com/download/FXS097" class="card-button" target="_blank" rel="noopener noreferrer">
+                    <a href="https://laptop-updates.brave.com/download/FXS097" class="card-button w-full md:w-auto text-center" target="_blank" rel="noopener noreferrer">
                         Download Brave
                     </a>
                 </div>
