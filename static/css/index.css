@@ -1,3 +1,18 @@
+/* Add this to your CSS */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 10%; /* 10% left margin for 80% width */
+    width: 80%; /* 80% width */
+    height: 100%;
+    border-left: 2px dashed rgba(255, 255, 255, 0.3); /* Left border */
+    border-right: 2px dashed rgba(255, 255, 255, 0.3); /* Right border */
+    pointer-events: none; /* Ensure it doesn't block clicks */
+    z-index: 9999; /* Make sure it's on top */
+}
+
+
 /* Navigation border animation */
 .animated-border {
     position: relative;
@@ -12,15 +27,36 @@
     100% { background-position: 0% 50%; }
 }
 
-/* Card styles */
+/* Card Styles */
 .perspective-1000 {
     perspective: 1000px;
+    transform-style: preserve-3d;
 }
 
 .card {
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 0.1s ease-out;
+    transition: transform 0.05s linear;
+    will-change: transform;
+}
+
+.card .image-wrapper {
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.card .image-wrapper img {
+    border-radius: 0;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.card:hover .image-wrapper {
+    transform: translateZ(50px);
 }
 
 .card::before {
@@ -88,4 +124,69 @@
             0 0 60px rgba(79, 48, 171, 0.2),
             0 0 90px rgba(79, 48, 171, 0.1);
     }
+}
+
+/* FABULOUS Container Styles */
+.fabulous-container {
+    position: relative;
+    background: #111;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.fabulous-container:hover {
+    transform: scale(1.05) rotate(3deg);
+    box-shadow: 0 0 40px rgba(251, 84, 43, 0.4);
+}
+
+.fabulous-container::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(90deg, #4f30ab, #a3278f, #FB542B, #4f30ab);
+    border-radius: 14px;
+    z-index: -1;
+    background-size: 400% 100%;
+    animation: flowingBorder 6s linear infinite;
+    filter: blur(1px);
+}
+
+.fabulous-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #111;
+    border-radius: 12px;
+    z-index: -1;
+}
+
+/* Sparkle Animation */
+@keyframes sparkle {
+    0% { opacity: 0; transform: translateY(0) translateX(0); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-100px) translateX(100px); }
+}
+
+.sparkle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkle 1.5s infinite;
+}
+
+.sparkle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.sparkle:nth-child(2) { top: 30%; left: 70%; animation-delay: 0.5s; }
+.sparkle:nth-child(3) { top: 50%; left: 40%; animation-delay: 1s; }
+.sparkle:nth-child(4) { top: 80%; left: 90%; animation-delay: 1.5s; }
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(90deg, #FB542B, #a3278f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }

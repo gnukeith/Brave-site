@@ -1,70 +1,70 @@
-// Mobile menu toggle
-function toggleMobileMenu() {
+// Mobile menu functionality
+document.getElementById('mobileMenuButton').addEventListener('click', function() {
     const menu = document.getElementById('mobileMenu');
     menu.classList.toggle('hidden');
-}
+});
 
-// Dropdown toggle
-function toggleDropdown(id) {
-    // Close all dropdowns first
-    document.querySelectorAll('.dropdown-content').forEach(dropdown => {
-        if (dropdown.id !== id && !dropdown.classList.contains('hidden')) {
-            dropdown.classList.add('hidden');
-        }
-    });
-
-    // Toggle the clicked dropdown
-    const dropdown = document.getElementById(id);
-    dropdown.classList.toggle('hidden');
-}
-
-// Close dropdowns when clicking outside
+// Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!e.target.matches('.dropdown button')) {
-        document.querySelectorAll('.dropdown-content').forEach(dropdown => {
-            if (!dropdown.classList.contains('hidden')) {
-                dropdown.classList.add('hidden');
-            }
-        });
+    const menu = document.getElementById('mobileMenu');
+    const menuButton = document.getElementById('mobileMenuButton');
+    
+    if (!menu.contains(e.target) && !menuButton.contains(e.target) && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
     }
 });
 
-// Card 3D effect
+// Card hover effect for desktop only
 document.addEventListener('DOMContentLoaded', function() {
     const card = document.querySelector('.card');
     const imageWrapper = document.querySelector('.image-wrapper');
+    let isHovered = false;
+    let rafId = null;
 
-    const rotationLimit = 15;
-    const scaleUp = 1.05;
+    function updateCardTransform(e) {
+        if (!isHovered) return;
 
-    function handleMove(e) {
-        const cardRect = card.getBoundingClientRect();
-        const cardCenterX = cardRect.left + (cardRect.width / 2);
-        const cardCenterY = cardRect.top + (cardRect.height / 2);
-
-        const offsetX = e.clientX - cardCenterX;
-        const offsetY = e.clientY - cardCenterY;
-
-        const rotateX = (offsetY / cardRect.height) * rotationLimit;
-        const rotateY = (offsetX / cardRect.width) * -rotationLimit;
-
-        // Check if we're on mobile/tablet
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
         
-        if (!isMobile) {
-            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scaleUp})`;
-            imageWrapper.style.transform = `translateZ(50px)`;
-        }
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -20; // Reduced rotation
+        const rotateY = ((x - centerX) / centerX) * 20; // Reduced rotation
+        const scale = 1.03; // Smaller scale for subtle responsiveness
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+        imageWrapper.style.transform = `translateZ(50px)`; // Image pops out less
+
+        rafId = requestAnimationFrame(() => updateCardTransform(e));
     }
 
-    function handleLeave() {
-        card.style.transform = `rotateX(0) rotateY(0) scale(1)`;
-        imageWrapper.style.transform = `translateZ(0)`;
-    }
-
-    // Only add hover effects on non-mobile devices
+    // Only add hover effects on desktop
     if (!window.matchMedia('(max-width: 768px)').matches) {
-        card.addEventListener('mousemove', handleMove);
-        card.addEventListener('mouseleave', handleLeave);
+        card.addEventListener('mouseenter', () => {
+            isHovered = true;
+            card.style.transition = 'transform 0.15s ease-out'; // Slightly slower transition
+            imageWrapper.style.transition = 'transform 0.15s ease-out'; // Slightly slower transition
+        });
+        
+        card.addEventListener('mousemove', (e) => {
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+            }
+            rafId = requestAnimationFrame(() => updateCardTransform(e));
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            isHovered = false;
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+            }
+            card.style.transition = 'transform 0.25s ease-out'; // Smoother reset
+            imageWrapper.style.transition = 'transform 0.25s ease-out'; // Smoother reset
+            card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+            imageWrapper.style.transform = 'translateZ(0)'; // Reset image position
+        });
     }
 });
