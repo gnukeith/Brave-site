@@ -1,0 +1,185 @@
+.animated-border {
+    position: relative;
+    background: linear-gradient(45deg, #4f30ab, #a3278f, #FB542B);
+    background-size: 300% 300%;
+    animation: gradient-animation 5s ease infinite;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.popout-container {
+    perspective: 1000px;
+}
+
+.popout-container {
+    perspective: 1000px;
+}
+
+.card {
+    background: #111;
+    border-radius: 12px;
+    /* Adjust overall card padding */
+    padding: 32px;
+    /* Adjust card width */
+    width: 500px;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        90deg,
+        #4f30ab,
+        #a3278f,
+        #FB542B,
+        #4f30ab
+    );
+    border-radius: 14px;
+    z-index: -1;
+    background-size: 400% 100%;
+    animation: flowingBorder 6s linear infinite;
+    filter: blur(1px);
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #111;
+    border-radius: 12px;
+    z-index: -1;
+}
+
+@keyframes flowingBorder {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+@keyframes glowEffect {
+    0% {
+        box-shadow: 
+            0 0 30px rgba(79, 48, 171, 0.5),
+            0 0 60px rgba(79, 48, 171, 0.2),
+            0 0 90px rgba(79, 48, 171, 0.1);
+    }
+    33% {
+        box-shadow: 
+            0 0 30px rgba(163, 39, 143, 0.5),
+            0 0 60px rgba(163, 39, 143, 0.2),
+            0 0 90px rgba(163, 39, 143, 0.1);
+    }
+    66% {
+        box-shadow: 
+            0 0 30px rgba(251, 84, 43, 0.5),
+            0 0 60px rgba(251, 84, 43, 0.2),
+            0 0 90px rgba(251, 84, 43, 0.1);
+    }
+    100% {
+        box-shadow: 
+            0 0 30px rgba(79, 48, 171, 0.5),
+            0 0 60px rgba(79, 48, 171, 0.2),
+            0 0 90px rgba(79, 48, 171, 0.1);
+    }
+}
+
+.card:hover {
+    animation: glowEffect 6s linear infinite;
+}
+
+.card-title {
+    /* Adjust title size */
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 0;
+    /* Adjust title bottom spacing */
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    /* Adjust description text size */
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ccc;
+    /* Adjust text bottom spacing */
+    margin-bottom: 2rem;
+}
+
+.image-wrapper {
+    width: 100%;
+    /* Remove fixed height to maintain aspect ratio */
+    overflow: hidden;
+    border-radius: 0;
+    /* Adjust image wrapper margins */
+    margin: 24px 0;
+    transition: transform 0.1s ease-out;
+    background: #eee;
+}
+
+.card-image {
+    display: block;
+    width: 100%;
+    /* Remove fixed height to maintain aspect ratio */
+    height: auto;
+    /* Remove object-fit as we want natural sizing */
+    vertical-align: middle;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Adjust footer top margin */
+    margin-top: 2rem;
+}
+
+.card-link {
+    color: #ccc;
+    text-decoration: none;
+    /* Adjust link text size */
+    font-size: 1rem;
+}
+
+.card-button {
+    background: linear-gradient(45deg, #FB542B, #a3278f);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    /* Adjust button padding */
+    padding: 0.75em 1.5em;
+    /* Adjust button text size */
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.card-button:hover {
+    opacity: 0.9;
+}

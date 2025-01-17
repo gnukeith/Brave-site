@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="../static/css/index.css" rel="stylesheet">
+</head>
+<body class="bg-black text-white">
+    <!-- Navigation Bar -->
+    <div class="animated-border p-[2px] rounded-lg w-4/5 mx-auto mt-4">
+        <nav class="relative bg-black rounded-lg">
+            <div class="container mx-auto flex items-center p-4">
+                <!-- Brave Icon -->
+                <div class="flex-shrink-0">
+                    <img src="../static/assets/icons/brave-icon.svg" alt="Brave" class="w-12 h-12">
+                </div>
+                <!-- Navigation Links - reduced margin -->
+                <div class="flex space-x-6 ml-8 flex-grow justify-end">
+                    <!-- Browser Dropdown -->
+                    <div class="dropdown">
+                        <button onclick="toggleDropdown('browser')" class="hover:text-gray-400 py-2">Browser</button>
+                        <div id="browser" class="dropdown-content hidden absolute mt-2 w-48 bg-black border border-gray-700 rounded-md shadow-lg">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Downloads</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Desktop</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Android</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">iOS</a>
+                        </div>
+                    </div>
+                    <!-- Features Dropdown -->
+                    <div class="dropdown">
+                        <button onclick="toggleDropdown('features')" class="hover:text-gray-400 py-2">Features</button>
+                        <div id="features" class="dropdown-content hidden absolute mt-2 w-48 bg-black border border-gray-700 rounded-md shadow-lg">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Brave Shields</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">VPN</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Leo AI</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Wallet</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-800">Rewards</a>
+                        </div>
+                    </div>
+                    <a href="#" class="hover:text-gray-400 py-2">Playlists</a>
+                    <a href="#" class="hover:text-gray-400 py-2">News</a>
+                    <a href="#" class="hover:text-gray-400 py-2">Talk</a>
+                    <a href="#" class="hover:text-gray-400 py-2">Advanced Privacy</a>
+                    <a href="#" class="hover:text-gray-400 py-2">All Features</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="flex justify-center items-center min-h-[calc(100vh-120px)] p-8">
+        <div class="popout-container">
+            <div class="card">
+                <h2 class="card-title">Brave Browser</h2>
+                <p class="card-text">
+                    A secure, fast, and private web browser with built-in shields and rewards. 
+                    Experience the web without trackers, malware, or ads while earning rewards for your attention.
+                </p>
+                <div class="image-wrapper">
+                    <img src="../static/assets/images/bg.png" alt="Brave Browser Preview" class="card-image">
+                </div>
+                <div class="card-footer">
+                    <a href="https://github.com/brave" class="card-link" target="_blank" rel="noopener noreferrer">
+                        View Source Code
+                    </a>
+                    <a href="https://laptop-updates.brave.com/download/FXS097" class="card-button" target="_blank" rel="noopener noreferrer">
+                        Download Brave
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+    <script src="../static/js/main.js"></script>
+</body>
+</html>
