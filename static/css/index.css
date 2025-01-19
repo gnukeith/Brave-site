@@ -12,7 +12,6 @@ body::before {
     z-index: 9999; /* Make sure it's on top */
 }
 
-
 /* Navigation border animation */
 .animated-border {
     position: relative;
@@ -27,6 +26,46 @@ body::before {
     100% { background-position: 0% 50%; }
 }
 
+/* Card and Fabulous Container Shared Styles */
+.card, .fabulous-container {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.05s linear;
+    will-change: transform;
+    height: 100%;
+    min-height: 550px;  /* Reduced from 600px */
+    max-height: 600px;  /* Added max-height */
+    display: flex;
+    flex-direction: column;
+    padding: 2px;  /* Space for border */
+    border-radius: 14px;
+    width: 100%;  /* Ensure both have same width */
+}
+
+/* Common border animation */
+.card::before, .fabulous-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;  /* Changed from -2px to 0 since we have padding */
+    background: linear-gradient(90deg, #4f30ab, #a3278f, #FB542B, #4f30ab);
+    border-radius: 14px;
+    z-index: 0;
+    background-size: 400% 100%;
+    animation: flowingBorder 6s linear infinite;
+    filter: blur(1px);
+}
+
+/* Inner content background */
+.card > div, .fabulous-content {
+    position: relative;
+    background: #111;
+    border-radius: 12px;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    padding: 1.5rem;  /* Standardize padding */
+}
+
 /* Card Styles */
 .perspective-1000 {
     perspective: 1000px;
@@ -34,10 +73,23 @@ body::before {
 }
 
 .card {
+    display: flex;
+    flex-direction: column;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.05s linear;
     will-change: transform;
+    padding: 2px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.card > div {
+    background: #111;
+    border-radius: 12px;
+    height: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .card .image-wrapper {
@@ -59,25 +111,8 @@ body::before {
     transform: translateZ(50px);
 }
 
-.card::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(90deg, #4f30ab, #a3278f, #FB542B, #4f30ab);
-    border-radius: 14px;
-    z-index: -1;
-    background-size: 400% 100%;
-    animation: flowingBorder 6s linear infinite;
-    filter: blur(1px);
-}
-
 .card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #111;
-    border-radius: 12px;
-    z-index: -1;
+    display: none;
 }
 
 @keyframes flowingBorder {
@@ -129,59 +164,82 @@ body::before {
 /* FABULOUS Container Styles */
 .fabulous-container {
     position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.05s linear;
+    will-change: transform;
+    padding: 2px;  /* Creates space for the border */
+    border-radius: 14px;  /* Match the border radius of the gradient */
+    overflow: hidden;     /* Ensure content respects border radius */
+}
+
+.fabulous-content {
+    position: relative;
     background: #111;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    border-radius: 12px;  /* Slightly smaller than container */
+    z-index: 1;          /* Above the gradient border */
+    height: 100%;
+    width: 100%;
+    padding: 1.5rem;  /* Standardize padding */
+}
+
+.fabulous-content > div {
+    justify-content: flex-start;  /* Changed from justify-between */
+    padding: 0;  /* Remove extra padding */
+    height: 100%;
 }
 
 .fabulous-container:hover {
-    transform: scale(1.05) rotate(3deg);
-    box-shadow: 0 0 40px rgba(251, 84, 43, 0.4);
+    animation: glowEffect 6s linear infinite;
 }
 
 .fabulous-container::before {
     content: '';
     position: absolute;
-    inset: -2px;
+    inset: 0;  /* Changed from -2px to 0 since we have padding */
     background: linear-gradient(90deg, #4f30ab, #a3278f, #FB542B, #4f30ab);
     border-radius: 14px;
-    z-index: -1;
+    z-index: 0;
     background-size: 400% 100%;
     animation: flowingBorder 6s linear infinite;
     filter: blur(1px);
 }
 
+/* Remove unused styles */
 .fabulous-container::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #111;
-    border-radius: 12px;
-    z-index: -1;
+    display: none;
 }
 
-/* Sparkle Animation */
-@keyframes sparkle {
-    0% { opacity: 0; transform: translateY(0) translateX(0); }
-    50% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(-100px) translateX(100px); }
+/* Enhanced Stat Cards */
+.stat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(251, 84, 43, 0.1);
 }
 
-.sparkle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    opacity: 0;
-    animation: sparkle 1.5s infinite;
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(251, 84, 43, 0.2);
 }
 
-.sparkle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
-.sparkle:nth-child(2) { top: 30%; left: 70%; animation-delay: 0.5s; }
-.sparkle:nth-child(3) { top: 50%; left: 40%; animation-delay: 1s; }
-.sparkle:nth-child(4) { top: 80%; left: 90%; animation-delay: 1.5s; }
+/* Feature Item Animation */
+.feature-item {
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateX(10px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .fabulous-container {
+        margin-left: 0;
+        margin-top: 2rem;
+    }
+    
+    .stat-card {
+        transform: none !important;
+    }
+}
 
 /* Gradient Text */
 .gradient-text {
@@ -189,4 +247,19 @@ body::before {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+}
+
+/* Gradient Text with Flow */
+.gradient-text-flow {
+    background: linear-gradient(90deg, #4f30ab, #a3278f, #FB542B, #4f30ab);
+    background-size: 300% 100%;
+    animation: flowingText 6s linear infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+@keyframes flowingText {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
 }
