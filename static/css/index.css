@@ -18,6 +18,7 @@ body::before {
     background: linear-gradient(45deg, #4f30ab, #a3278f, #FB542B);
     background-size: 300% 300%;
     animation: gradient-animation 5s ease infinite;
+    z-index: 50;
 }
 
 @keyframes gradient-animation {
@@ -40,6 +41,7 @@ body::before {
     padding: 2px;  /* Space for border */
     border-radius: 14px;
     width: 100%;  /* Ensure both have same width */
+    z-index: 10;
 }
 
 /* Common border animation */
@@ -262,4 +264,37 @@ body::before {
 @keyframes flowingText {
     0% { background-position: 0% 50%; }
     100% { background-position: 300% 50%; }
+}
+
+.group-hover\:block {
+    z-index: 51;
+}
+
+.group {
+    position: relative;
+}
+
+.group .group-hover\:block {
+    position: absolute;
+    z-index: 51;
+    padding-top: 8px;
+    margin-top: -8px;
+}
+
+.group::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: transparent;
+}
+
+.group:hover .group-hover\:block {
+    display: block;
+}
+
+.group .group-hover\:block:hover {
+    display: block;
 }
